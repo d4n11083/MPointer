@@ -5,7 +5,7 @@
 #ifndef MPOINTER_MPOINTER_H
 #define MPOINTER_MPOINTER_H
 
-#include "iostream";
+#include <iostream>;
 
 
 template <typename T>
@@ -16,7 +16,9 @@ private:
     T num2;
 
 public:
-    void New( T nu1, T nu2 ){ num1 = nu1; num2 = nu2;     std::cout << num1 + num2 << std::endl;  }
+
+    MPointer() { num1 = 0; num2 = 0; }
+    void New(T nu1, T nu2 );
 
 };
 
