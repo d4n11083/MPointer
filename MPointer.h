@@ -5,22 +5,26 @@
 #ifndef MPOINTER_MPOINTER_H
 #define MPOINTER_MPOINTER_H
 
-#include <iostream>;
+#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
 
 
 template <typename T>
 class MPointer {
-
 private:
-    T num1;
-    T num2;
+    T* puntero = nullptr;
 
 public:
 
-    MPointer() { num1 = 0; num2 = 0; }
-    void New(T nu1, T nu2 );
+    MPointer();
+    static MPointer<T> New();
 
 };
 
+template <typename T>
+MPointer<T> MPointer<T>::New(){
 
+    std::cout <<"Se ha creado un nuevo puntero..." << std::endl;
+}
 #endif //MPOINTER_MPOINTER_H
