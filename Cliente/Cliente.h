@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <thread>
 #include <stdio.h>
+#include <netdb.h>
 #include "../DEFINITIONS.h"
 
 class Cliente {
@@ -29,12 +30,20 @@ private:
     struct sockaddr_in server_addr;
     socklen_t size;
 
+    //J
+    std::string DireccionIP =DIRECCION_IP;
+    int sock = -1;
+
 public:
     Cliente(sockaddr_in server_addr);
     ~Cliente();
     void iniciar();
     void ejecutar();
     void detener();
+
+    bool conn();
+    bool enviaDatos(std::string data);
+    std::string recibe(int size);
 };
 
 
