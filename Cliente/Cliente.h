@@ -21,7 +21,7 @@
 class Cliente {
 
 private:
-    int client_socket;                        /// Socket
+    int client_socket = -1;                        /// Socket
     bool salir;                         //Booleano para mantener vivo el cliente
     const int bufsize = 1024;           // Tamaño de las palabras
     char* buffer = new char(bufsize);   //Caracteres que se envian y se reciben
@@ -30,9 +30,7 @@ private:
     struct sockaddr_in server_addr;
     socklen_t size;
 
-    //J
     std::string DireccionIP =DIRECCION_IP;
-    int sock = -1;
 
 public:
     Cliente(sockaddr_in server_addr);

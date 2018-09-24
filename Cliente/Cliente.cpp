@@ -16,33 +16,7 @@ void Cliente::detener() {
 
 void Cliente::iniciar() {
     client_socket = socket(AF_INET,SOCK_STREAM,0);
-    ejecutar();
-}
-
-void Cliente::ejecutar() {
-
-    if(client_socket < 0){
-        std::cerr << " Error al crear el socket del cliente " << std::endl;
-    }
-
-    std::cout << "Se ha creado el socket del cliente" << std::endl;
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_port = htons(SERVER_PORT);
-    inet_pton(AF_INET,DIRECCION_IP, &server_addr.sin_addr);
-
-    int conexion = connect(client_socket,(struct sockaddr *) &server_addr, sizeof(server_addr));
-    if(conexion == 0){
-        std::cout << "Conexion con el servidor\n"
-                  << inet_ntoa(server_addr.sin_addr) << std::endl;
-    }
-
-    while(!salir){
-        memset(&buffer,0,bufsize);
-        //recv(client_socket,buffer, sizeof(buffer),0);
-        send(client_socket,"Hola cliente ",10,0);
-        close(client_socket);
-    }
-
+    conn();
 }
 
 //######################
@@ -50,8 +24,7 @@ void Cliente::ejecutar() {
 bool Cliente::conn() {
 
 
-    sock = socket(AF_INET,SOCK_STREAM, 0);
-    if( sock == -1 ){
+    if( client_socket == -1 ){
         perror("No se pudo conectar el socket");
     }
     std::cout << "Socket creado \n" << std::endl;
@@ -81,7 +54,7 @@ bool Cliente::conn() {
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons( SERVER_PORT );
 
-    if ( connect(sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0 ){
+    if ( connect(client_socket, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0 ){
         perror( "Error: conexion fallida" );
         return 1;
     }
@@ -92,7 +65,7 @@ bool Cliente::conn() {
 
 bool Cliente::enviaDatos(std::string data) {
 
-    if( send(sock, data.c_str(), strlen(data.c_str() ), 0  ) < 0  ){
+    if( send(client_socket, data.c_str(), strlen(data.c_str() ), 0  ) < 0  ){
         perror("Error: envio de datos fallido ");
         return false;
     }
@@ -105,7 +78,7 @@ std::string Cliente::recibe(int size = 512) {
     char buffer[size];
     std::string reply;
 
-    if( recv( sock, buffer, sizeof(buffer), 0 ) < 0 ){
+    if( recv( client_socket, buffer, sizeof(buffer), 0 ) < 0 ){
         puts("Entrega Fallida");
     }
 
