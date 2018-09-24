@@ -3,9 +3,3 @@
 //
 
 #include "MPointer.h"
-
-//template <typename T>
-//MPointer<T>::MPointer() {
-//    puntero = (T*) calloc(1, sizeof(T));
-//}
-

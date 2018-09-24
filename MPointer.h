@@ -16,15 +16,21 @@ private:
     T* puntero = nullptr;
 
 public:
-
     MPointer();
     static MPointer<T> New();
 
 };
 
 template <typename T>
-MPointer<T> MPointer<T>::New(){
+MPointer<T>::MPointer() {
+    puntero = (T*)calloc(2, sizeof(T));
+    std::cout << "Puntero Construido" << std::endl;
+}
 
+
+template <typename T>
+MPointer<T> MPointer<T>::New(){
+    MPointer();
     std::cout <<"Se ha creado un nuevo puntero..." << std::endl;
 }
 #endif //MPOINTER_MPOINTER_H
