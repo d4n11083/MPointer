@@ -48,6 +48,7 @@ int main() {
 //    std::cout<< "Imprimiendo z" << std::endl;
 //    std::cout << z;
 
+
     Cliente* cliente = new Cliente(sockaddr_in());
     cliente->iniciar();
     cliente->enviaDatos(mensajejsonchar);
