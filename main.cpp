@@ -15,13 +15,6 @@ int main() {
     //MPointer<int > ptr1 = MPointer<int >::New();
     //MPointer<int > ptr3 = MPointer<int >::New();
 
-    json solicitud;
-
-    solicitud["Solicitud"] = 1;
-    std::string stringEnviar = solicitud.dump();
-    char *mensajejsonchar = &stringEnviar[0u];
-
-
 
 
     //std::cout << typeid(ptr).name() << std::endl;
@@ -40,28 +33,40 @@ int main() {
 //    std::cout << ptr.operator&() << std::endl;
 //
 //
-
-
 //      std::cout << ptr.operator&() << std::endl;
-
 //    int z = ptr.operator&();
 //    std::cout<< "Imprimiendo z" << std::endl;
 //    std::cout << z;
+
+
+    json solicitud;
+    solicitud["Solicitud"] = 1;
+    std::string stringEnviar = solicitud.dump();
+    char *mensajejsonchar = &stringEnviar[0u];
+
+    json solicitud2;
+    solicitud2["ID"] = 1;
+    solicitud2["ValorIngresar"] = 12;
+    std::string stringEnviarDatos = solicitud2.dump();
+    char *mensajejsoncharDatos = &stringEnviarDatos[0u];
 
 
 
 
     Cliente* cliente = new Cliente(sockaddr_in());
     cliente->iniciar();
-    cliente->enviaDatos(mensajejsonchar);
+    cliente->enviaDatos("Mensaje del cliente");
     std::cout << cliente->recibe(1024);
     std::cout << "\n" <<std::endl;
     cliente->enviaDatos(mensajejsonchar);
 
+
+    std::cout<< cliente->recibe(1024);
+    cliente->enviaDatos(mensajejsoncharDatos);
+
     std::cout << cliente->recibe(1024);
     cliente->enviaDatos("HOLA MUNDO 1 OMG");
     std::cout << cliente->recibe(1024);
-
 
     return 0;
 }
