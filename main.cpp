@@ -28,6 +28,7 @@ int main() {
     std::cout << "\n";
 
     float t = 9.0;
+    
 
     ptr.operator=(t);
 
