@@ -1,5 +1,5 @@
 # MPointer
-###Bienvenido al proyecto de MPointer, este es un proyecto para el curso de Estructuras y Datos II, segundo semestre del 2018. 
+**Bienvenido al proyecto de MPointer, este es un proyecto para el curso de Estructuras y Datos II, segundo semestre del 2018.** 
 
 **Antes de empezar**, este proyecto está dividido en dos iteraciones, la primera comprender las secciones de **MPointer**, **MPointerGC** y la segunda iteración comprende la comunicación entre **cliente** y **servidor**. En este repositorio encontraremos las secciones de Cliente, MPointer y MPointer GC, la implementación del servidor está en un **repositorio diferente**, ya que lo creamos como un proyecto aparte. 
 
