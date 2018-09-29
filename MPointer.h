@@ -16,23 +16,32 @@ template <typename T>
 class MPointer {
 private:
 
-    T* puntero = nullptr;
-    int prueba;
-    int idMpointer;
-    int idMpointerGB;
-    int idMpointerServer;
+    T* puntero = nullptr;  //Reserva del espacio del dato de tipo T, cuando se accede al operador *
+    int idMpointer;        //ID de Mpointer
+    int idMpointerGB;      //ID del GB
+    int idMpointerServer;  //ID del Server
 
-    static int cantidadMPointers;
+    static int cantidadMPointers;  //Cantidad de MPointers
 
 public:
 
+    //Constructor de la clase
     MPointer();
-    std::string pruebas();
+
+    //Método estático de New()
     static MPointer<T> New();
+
+    //Sobrecarga de los operadores
     T operator*(T pMpointer);
     T operator&();
+
+    //Sobreescritura del operador =
     T operator=( T elemento1);
+    T operator=( MPointer<T> pMpointer );
+
+    std::string MPointerInfo ();
 };
+
 //##################################################################################
 
 /**
@@ -45,21 +54,17 @@ int MPointer<T>::cantidadMPointers = 0;
 
 
 template<typename T>
-std::string MPointer<T>::pruebas() {
+std::string MPointer<T>::MPointerInfo() {
 
-    std::cout <<"Cantidad Mpointers: " <<  cantidadMPointers << std::endl;
-    std::cout <<"Id: " << prueba << std::endl;
-
-
-
-    if( puntero == nullptr ){
-        std::cout << puntero << std::endl;
-        return "Puntero es Nulo";
-    }else{
-        std::cout << prueba;
-        return "Puntero no es Nulo";
+    std::cout <<"\tCantidad Mpointers: " <<  cantidadMPointers << std::endl;
+    std::cout << "**********************************************" << std::endl;
+    std::cout <<"IdMpointer: " << idMpointer << std::endl;
+    std::cout <<"IdMPointerGB: " << idMpointerGB << std::endl;
+    std::cout <<"IdServer: " << idMpointerServer << std::endl;
+    if( puntero != nullptr ){
+        std::cout << "Valor Almacenado: "<< *puntero << std::endl;
     }
-
+    std::cout << "**********************************************" << std::endl;
 }
 
 
@@ -70,8 +75,6 @@ std::string MPointer<T>::pruebas() {
  */
 template <typename T>
 MPointer<T> MPointer<T>::New(){
-    std::cout <<"Se ha creado un nuevo MPointer con ID: " << cantidadMPointers << std::endl;
-
 
     return MPointer();
 }
@@ -99,13 +102,34 @@ MPointer<T>::MPointer(){
  */
 template<typename T >
 T MPointer<T>::operator=(T elemento1){
-    if( typeid(elemento1) == typeid(this) ) {
-        std::cout << "LOS DOS SON MPOINTERS" << std::endl;
-    }
+
     if( typeid(*puntero) == typeid(elemento1) ){
         std::cout << "LOS DOS SON DEL MISMO TIPO INTERNAMENTE" << std::endl;
+        this->operator*(elemento1);
     }else{
         std::cout << "SON DE DIFERENTE TIPO" << std::endl;
+    }
+}
+
+/**
+ * Sobrecarga del operador "="
+ * Verifica el  tipo de los operandos son de MPointer
+ *
+ * @tparam T tipo de dato
+ * @param elemento1 elemento a la izquierda de =
+ * @param elemento2 elemento a la derecha de =
+ * @return
+ */
+template<typename T >
+T MPointer<T>::operator=(MPointer<T> pMPointer){
+
+    if( typeid(pMPointer) == typeid(MPointer<T>) ) {
+        this->idMpointerServer = pMPointer.idMpointerServer;
+        this->idMpointer = pMPointer.idMpointer;
+        this->idMpointerGB = pMPointer.idMpointerGB;
+        *(this->puntero) = *(pMPointer.puntero);
+    } else{
+        std::cout << "No son de tipo MPointer." << std::endl;
     }
 }
 

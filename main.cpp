@@ -27,21 +27,22 @@ int main() {
 
     std::cout << "\n";
 
-    float t = 9.0;
-    
+    ptr.operator=(3);
+    ptr.operator=(ptr2);
 
-    ptr.operator=(t);
+
+
 
 
     //MPointer<int > ptr  = MPointer<int >::New();
     //MPointer<int > ptr1 = MPointer<int >::New();
     //MPointer<int > ptr3 = MPointer<int >::New();
 
-    json solicitud;
-
-    solicitud["Solicitud"] = 1;
-    std::string stringEnviar = solicitud.dump();
-    char *mensajejsonchar = &stringEnviar[0u];
+//    json solicitud;
+//
+//    solicitud["Solicitud"] = 1;
+//    std::string stringEnviar = solicitud.dump();
+//    char *mensajejsonchar = &stringEnviar[0u];
 
 
 
@@ -73,16 +74,16 @@ int main() {
 
 
 
-    Cliente* cliente = new Cliente(sockaddr_in());
-    cliente->iniciar();
-    cliente->enviaDatos(mensajejsonchar);
-    std::cout << cliente->recibe(1024);
-    std::cout << "\n" <<std::endl;
-    cliente->enviaDatos(mensajejsonchar);
-
-    std::cout << cliente->recibe(1024);
-    cliente->enviaDatos("HOLA MUNDO 1 OMG");
-    std::cout << cliente->recibe(1024);
+//    Cliente* cliente = new Cliente(sockaddr_in());
+//    cliente->iniciar();
+//    cliente->enviaDatos(mensajejsonchar);
+//    std::cout << cliente->recibe(1024);
+//    std::cout << "\n" <<std::endl;
+//    cliente->enviaDatos(mensajejsonchar);
+//
+//    std::cout << cliente->recibe(1024);
+//    cliente->enviaDatos("HOLA MUNDO 1 OMG");
+//    std::cout << cliente->recibe(1024);
 
 
     return 0;
