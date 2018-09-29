@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <netdb.h>
 #include "../DEFINITIONS.h"
-
+#include "JSON/json.hpp"
 class Cliente {
 
 private:
@@ -31,6 +31,9 @@ private:
     socklen_t size;
 
     std::string DireccionIP =DIRECCION_IP;
+    using json =  nlohmann::json;
+
+    int ID;
 
 public:
     Cliente(sockaddr_in server_addr);
@@ -42,6 +45,9 @@ public:
     bool conn();
     bool enviaDatos(std::string data);
     std::string recibe(int size);
+
+    void solicitudUno();
+    void solicitudDos();
 };
 
 

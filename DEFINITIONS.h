@@ -4,4 +4,4 @@
 
 
 #define SERVER_PORT 8002
-#define DIRECCION_IP "192.168.100.17"
+#define DIRECCION_IP "192.168.100.12"
