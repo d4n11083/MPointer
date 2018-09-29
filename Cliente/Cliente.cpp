@@ -81,10 +81,56 @@ std::string Cliente::recibe(int size = 512) {
     if( recv( client_socket, buffer, sizeof(buffer), 0 ) < 0 ){
         puts("Entrega Fallida");
     }
-
     reply = buffer;
     return reply;
 }
 
+void Cliente::solicitudUno() {
 
+    json solicitud;
+
+    solicitud["Solicitud"] = 1;
+    std::string stringEnviar = solicitud.dump();
+    char *mensajejsonchar = &stringEnviar[0u];
+
+    enviaDatos(" ");  //Este mensaje fue enviado desde el cliente
+    std::cout << recibe(1024)<< std::endl; //Este mensaje fue enviado desde el server
+    enviaDatos(mensajejsonchar); //Envia Json con solicitud
+
+    std::cout <<recibe(1024) << std::endl; //Mensaje Recibido
+
+
+    json recibirSolicitud = json::parse(recibe(1024)); //Recibe Json con el ID de parte del servidor
+    ID = recibirSolicitud["ID"];
+    std::cout << "Recibí el ID: "<< ID<< std::endl;
+
+}
+
+void Cliente::solicitudDos() {
+
+    json solicitudDos;
+
+    solicitudDos["Solicitud"] = 2;
+    std::string stringEnviar2 = solicitudDos.dump();
+    char *mensajejsonchar2 = &stringEnviar2[0u];
+
+    json enviarDat;
+    enviarDat["ID"] = ID;
+    enviarDat["ValorIngresar"] = 5;
+    std::string stringEnviarDatos = enviarDat.dump();
+    char *enviarDatoschar = &stringEnviarDatos[0u];
+
+    enviaDatos(" ");
+    std::cout << recibe(1024)<< std::endl;
+    enviaDatos(mensajejsonchar2);
+    std::cout << recibe(1024)<< std::endl;
+
+    enviaDatos(enviarDatoschar);
+
+    std::cout << "recibiendo" << std::endl;
+    std::cout <<recibe(1024) << std::endl; //Mensaje Recibido
+
+
+
+}
 //######################
