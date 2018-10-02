@@ -1,12 +1,18 @@
 #include <iostream>
 #include "Cliente/Cliente.h"
-#include "MPointer.h"
 #include "typeinfo"
 #include "Cliente/JSON/json.hpp"
+#include "MPointerLista/ListaMPointer.h"
 
 using json =  nlohmann::json;
 
 int main() {
+
+    ListaMPointer *lista = new ListaMPointer();
+
+    lista->insertarFinal(12);
+    //lista->imprimirLista();
+
 
 
 
@@ -41,25 +47,25 @@ int main() {
 //    solicitud["Solicitud"] = 1;
 //    std::string stringEnviar = solicitud.dump();
 //    char *mensajejsonchar = &stringEnviar[0u];
-
-    MPointer<int> ptr  = MPointer<int>::New();
-    MPointer<int> ptr2  = MPointer<int>::New();
-    MPointer<int> ptr3 = MPointer<int>::New();
-
-    ptr.operator*(6);
-    ptr2.operator*(7);
-    ptr3.operator*(8);
-
-    int prueba = ptr.operator&();
-
-    std::cout << prueba;
-    std::cout << ptr2.operator&();
-    std::cout << ptr3.operator&();
-
-    std::cout << "\n";
-
-    ptr.operator=(3);
-    ptr.operator=(ptr2);
+//
+//    MPointer<int> ptr  = MPointer<int>::New();
+//    MPointer<int> ptr2  = MPointer<int>::New();
+//    MPointer<int> ptr3 = MPointer<int>::New();
+//
+//    ptr.operator*(6);
+//    ptr2.operator*(7);
+//    ptr3.operator*(8);
+//
+//    int prueba = ptr.operator&();
+//
+//    std::cout << prueba;
+//    std::cout << ptr2.operator&();
+//    std::cout << ptr3.operator&();
+//
+//    std::cout << "\n";
+//
+//    ptr.operator=(3);
+//    ptr.operator=(ptr2);
 
 
 
@@ -104,12 +110,12 @@ int main() {
 
 
 
-
-    Cliente* cliente = new Cliente(sockaddr_in());
-    cliente->iniciar();
-    //cliente->solicitudUno();
-    //sleep(100000);
-    cliente->solicitudDos();
+//
+//    Cliente* cliente = new Cliente(sockaddr_in());
+//    cliente->iniciar();
+//    //cliente->solicitudUno();
+//    //sleep(100000);
+//    cliente->solicitudDos();
     /**
     cliente->enviaDatos(mensajejsonchar);
     std::cout << cliente->recibe(1024);

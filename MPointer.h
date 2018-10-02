@@ -40,6 +40,7 @@ public:
     T operator=( MPointer<T> pMpointer );
 
     std::string MPointerInfo ();
+
 };
 
 //##################################################################################
@@ -127,7 +128,7 @@ T MPointer<T>::operator=(MPointer<T> pMPointer){
         this->idMpointerServer = pMPointer.idMpointerServer;
         this->idMpointer = pMPointer.idMpointer;
         this->idMpointerGB = pMPointer.idMpointerGB;
-        *(this->puntero) = *(pMPointer.puntero);
+        //*(this->puntero) = *(pMPointer.puntero);
     } else{
         std::cout << "No son de tipo MPointer." << std::endl;
     }
@@ -149,12 +150,11 @@ template <typename T>
 T MPointer<T>::operator&() {
     if (puntero == nullptr){
         std::cout << "Es Nulo" << std::endl;
-        return 0;
+        return *puntero;
     }else{
         return *puntero;
     }
 }
-
 
 
 #endif //MPOINTER_MPOINTER_H
